@@ -16,8 +16,8 @@
   ;; Note: consider using different time values for your different fingers.
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
-  tap-time 200
-  hold-time 150
+  tap-time 250
+  hold-time 200
 )
 (defalias
   a (tap-hold $tap-time $hold-time a lmet)
@@ -39,7 +39,7 @@
   ;; layer-switch changes the base layer.
 
   ;; tap for capslk, hold for lctl
-  cap (tap-hold 200 200 esc (layer-toggle symbols))
+  cap (tap-hold $tap-time $hold-time esc (layer-toggle symbols))
   space (tap-hold $tap-time $hold-time spc (layer-toggle symbols))
 
   chj (chord querty j)
