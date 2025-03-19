@@ -10,7 +10,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  lctl lmet lalt           spc            ralt rctl
 )
 (defvar
   ;; Note: consider using different time values for your different fingers.
@@ -18,19 +18,20 @@
   ;; fingers faster.
   tap-time 200
   hold-time 200
+  hold-time-slow 300
 )
 (defalias
-  a (tap-hold $tap-time $hold-time a lmet)
-  s (tap-hold $tap-time $hold-time s lalt)
+  a (tap-hold $tap-time $hold-time-slow a lmet)
+  s (tap-hold $tap-time $hold-time-slow s lalt)
   d (tap-hold $tap-time $hold-time d lsft)
   f (tap-hold $tap-time $hold-time f lctl)
   j (tap-hold $tap-time $hold-time j rctl)
   k (tap-hold $tap-time $hold-time k rsft)
-  l (tap-hold $tap-time $hold-time l ralt)
-  ; (tap-hold $tap-time $hold-time ; rmet)
+  l (tap-hold $tap-time $hold-time-slow l ralt)
+  ; (tap-hold $tap-time $hold-time-slow ; rmet)
 
-  s1 (tap-hold $tap-time $hold-time S-, lmet)
-  s2 (tap-hold $tap-time $hold-time S-. lalt)
+  s1 (tap-hold $tap-time $hold-time-slow S-, lmet)
+  s2 (tap-hold $tap-time $hold-time-slow S-. lalt)
   s3 (tap-hold $tap-time $hold-time [ lsft)
   s4 (tap-hold $tap-time $hold-time ] lctl)
 
@@ -39,8 +40,8 @@
   ;; layer-switch changes the base layer.
 
   ;; tap for capslk, hold for lctl
-  cap (tap-hold $tap-time $hold-time esc (layer-toggle symbols))
-  space (tap-hold $tap-time $hold-time spc (layer-toggle symbols))
+  cap (tap-hold $tap-time $hold-time-slow esc (layer-toggle number))
+  space (tap-hold $tap-time $hold-time spc (layer-toggle symbol))
 
   chj (chord querty j)
   chk (chord querty k)
@@ -53,22 +54,35 @@
   chq (chord querty q)
   chw (chord querty w)
 
+  ch4 (chord number 4)
+  ch5 (chord number 5)
+  ch6 (chord number 6)
+  ch. (chord number .)
+
 )
 
 (deflayer qwerty
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc 
-  tab  @chq @chw e    r    t    y    u    i    @cho @chp [    ]    \ 
-  @cap @a   @s   @d   @f   g    h    @chj @chk @chl @ch; '    ret 
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft 
-  lctl lmet tab            @space         ralt rmet rctl
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  @chq @chw e    r    t    y    u    i    @cho @chp [    ]    \
+  @cap @a   @s   @d   @f   g    h    @chj @chk @chl @ch; '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet tab            @space         bspc rctl
 )
 
-(deflayer symbols
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc 
-  tab  S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S--  grv  [    ]    \ 
-  caps @s1  @s2  @s3  @s4  \    lft  down up   rght '    '    ret 
-  lsft S-9  S-0  S-[  S-]  S-\  home pgdn pgup end  S-'  rsft 
-  lctl lmet lalt           spc            ralt rmet rctl
+(deflayer symbol
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S--  grv  [    ]    \
+  caps @s1  @s2  @s3  @s4  \    lft  down up   rght '    '    ret
+  lsft S-9  S-0  S-[  S-]  S-\  home pgdn pgup end  S-'  rsft
+  lctl lmet lalt           spc            bspc rctl
+)
+
+(deflayer number
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   bspc
+  tab  XX   XX   XX   XX   XX   S-8  7    8    9    0    XX   XX   XX
+  XX   XX   XX   XX   XX   XX   =    @ch4 @ch5 @ch6 @ch. XX   ret
+  lsft XX   XX   XX   XX   XX   S-;  1    2    3    /    rsft
+  lctl lmet tab            spc            bspc rctl
 )
 
 (defchords querty 500
@@ -91,4 +105,17 @@
   (q  ) q
   (  w) w
   (q w) esc
+)
+(defchords number 500
+  (4    ) 4
+  (  5  ) 5
+  (    6) 6
+  (4 5  ) =
+  (  5 6) S-=
+  (4   6) S-grv
+  ;; (4 5 6)
+  (     .) .
+  (   6 .) -
+  (4    .) ,
+  (   5 .) C-bspc
 )
