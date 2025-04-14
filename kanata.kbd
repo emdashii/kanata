@@ -35,6 +35,9 @@
   s3 (tap-hold $tap-time $hold-time [ lsft)
   s4 (tap-hold $tap-time $hold-time ] lctl)
 
+  ;; New alias for delete to end of line
+  delend (multi S-end del)
+
     ;; tap: backtick (grave), hold: toggle layer-switching layer while held
 
   ;; layer-switch changes the base layer.
@@ -101,7 +104,7 @@
   ;; lots more combinations that I am not using
   (o  ) o
   (  p) p
-  (o p) C-bspc
+  (o p) @delend  ;; Changed from C-bspc to the new delete-to-end shortcut
   (q  ) q
   (  w) w
   (q w) esc
