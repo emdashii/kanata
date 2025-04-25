@@ -100,12 +100,12 @@
   ;; lots more combinations that I am not using
   (         ;) @;
   (      l  ;) -
-  (   k     ;) C-bspc
+  (   k     ;) @delend
   ;; (j  k  l ;) @four
   ;; lots more combinations that I am not using
   (o  ) o
   (  p) p
-  (o p) @delend
+  (o p) C-bspc
   (q  ) q
   (  w) w
   (q w) esc
