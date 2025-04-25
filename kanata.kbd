@@ -40,8 +40,14 @@
 
   ;; layer-switch changes the base layer.
 
-  ;; New alias for delete to end of line
+  ;; delete to end of line
   delend (macro S-end del)
+
+  ;; copy line and leave it selected
+  copyline (macro home S-end C-c)
+
+  ;; surround selection with quotes
+  surround (macro C-rght C-lft S-' C-rght S-' C-lft)
 
   ;; tap for capslk, hold for lctl
   cap (tap-hold $tap-time $hold-time-slow esc (layer-toggle number))
@@ -58,6 +64,9 @@
   chq (chord querty q)
   chw (chord querty w)
 
+  chu (chord querty u)
+  chi (chord querty i)
+
   ch4 (chord number 4)
   ch5 (chord number 5)
   ch6 (chord number 6)
@@ -67,7 +76,7 @@
 
 (deflayer qwerty
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @chq @chw e    r    t    y    u    i    @cho @chp [    ]    \
+  tab  @chq @chw e    r    t    y    @chu @chi @cho @chp [    ]    \
   @cap @a   @s   @d   @f   g    h    @chj @chk @chl @ch; '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet tab            @space         bspc rctl
@@ -101,8 +110,12 @@
   (         ;) @;
   (      l  ;) -
   (   k     ;) @delend
+  (j        ;) @copyline
   ;; (j  k  l ;) @four
   ;; lots more combinations that I am not using
+  (u  ) u
+  (  i) i
+  (u i) @surround
   (o  ) o
   (  p) p
   (o p) C-bspc
